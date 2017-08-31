@@ -44,6 +44,7 @@ export class SidepanelContainerComponent implements AfterContentInit {
   }
 
   onBackdropClicked() {
+    this.backdropClick.emit();
     console.log('backdrop clicked');
   }
 
