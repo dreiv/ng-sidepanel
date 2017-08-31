@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidepanelComponent implements OnInit {
 
+  position: string;
+
   constructor() { }
 
   ngOnInit() {
