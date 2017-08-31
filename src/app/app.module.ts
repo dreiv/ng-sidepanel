@@ -1,9 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { FooterComponent } from './footer/footer.component';
 import { FillerComponent } from './filler/filler.component';
+import { FooterComponent } from './footer/footer.component';
+import { SidepanelModule } from './modules/sidepanel/sidepanel.module';
 
 @NgModule({
   declarations: [
@@ -12,9 +13,10 @@ import { FillerComponent } from './filler/filler.component';
     FillerComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    SidepanelModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

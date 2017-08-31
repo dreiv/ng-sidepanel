@@ -1,3 +1,6 @@
-<p>
-  sidepanel-container works!
-</p>
+<div class="sidepanel-backdrop" [class.show]="true" (click)="onBackdropClicked()">
+</div>
+
+<ng-content select="app-sidepanel"></ng-content>
+
+<ng-content></ng-content>

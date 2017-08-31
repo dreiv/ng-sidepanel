@@ -9,7 +9,9 @@ export class SidepanelContainerComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
+  onBackdropClicked() {
+    console.log('backdrop clicked');
+  }
 }
