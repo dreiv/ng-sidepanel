@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 export type SidepanelPosition = 'end' | 'start';
 
@@ -17,12 +17,15 @@ export const SidepanelPosition = {
 @Component({
   selector: 'app-sidepanel',
   templateUrl: './sidepanel.component.html',
-  styleUrls: ['./sidepanel.component.css']
+  styleUrls: ['./sidepanel.component.css'],
+  host: {
+    '[class.open]': 'this.isOpen',
+    '[class.start]': 'position === "start"',
+    '[class.end]': 'position === "end"'
+  }
 })
 export class SidepanelComponent implements OnInit {
-
-  @HostBinding('class.open')
-  isOpen: boolean;
+  isOpen = false;
 
   @Input()
   get position() { return this._position; }
