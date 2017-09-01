@@ -52,11 +52,6 @@ export class SidepanelContainerComponent implements AfterContentInit {
   private validatePanels() {
     this._start = this._end = null;
 
-    // Ensure that we have at most two side panels declared.
-    if (this.panels.length > 2) {
-      throw Error(`${this.panels.length} side panels were declared for this container, maximum is 2.'`);
-    }
-
     // Ensure that we have at most one start and one end side panel.
     this.panels.forEach(panel => {
       if (panel.position === 'end') {
