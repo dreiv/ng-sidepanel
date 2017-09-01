@@ -12,14 +12,14 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './sidepanel.component.html',
   styleUrls: ['./sidepanel.component.scss'],
   host: {
-    '[class.open]': 'this.isOpen',
+    '[class.open]': 'this.opened',
     '[class.start]': 'this.position === "start"',
     '[class.end]': 'this.position === "end"'
   }
 })
 export class SidepanelComponent implements OnInit {
-  private isOpen: boolean;
-
+  /** Whether the side panel is opened. */
+  private opened: boolean;
   @Input() position: 'end' | 'start';
 
   constructor() {}
@@ -28,12 +28,12 @@ export class SidepanelComponent implements OnInit {
   }
 
   /** Open the side panel. */
-  open() {
+  public open() {
     this.toggle(true);
   }
 
   /** Close the side panel. */
-  close() {
+  public close() {
     this.toggle(false);
   }
 
@@ -41,10 +41,8 @@ export class SidepanelComponent implements OnInit {
    * Toggle the side panel.
    * @param isOpen Whether the side panel should be open.
    */
-  toggle(isOpen: boolean) {
-    if (this.isOpen !== isOpen) {
-      this.isOpen = isOpen;
-    }
+  toggle(isOpen: boolean = !this.opened) {
+    this.opened = isOpen;
   }
 
 }
