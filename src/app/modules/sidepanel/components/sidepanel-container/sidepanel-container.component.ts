@@ -66,6 +66,7 @@ export class SidepanelContainerComponent implements AfterContentInit {
         }
 
         this._start = panel;
+        this._start.position = 'start';
       }
     });
   }
