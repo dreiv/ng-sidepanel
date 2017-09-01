@@ -1,8 +1,8 @@
 <app-sidepanel-container>
   <app-sidepanel #sidepanel>
-    <app-filler></app-filler>
+    <h1>Side Panel</h1>
 
-    <button>Close me</button>
+    <button (click)="sidepanel.close()">Close me</button>
   </app-sidepanel>
 
   <app-filler></app-filler>

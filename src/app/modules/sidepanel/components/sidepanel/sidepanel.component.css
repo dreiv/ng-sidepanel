@@ -1,0 +1,12 @@
+:host {
+  background: wheat;
+  height: 100%;
+  width: 100%;
+  display: block;
+  position: absolute;
+  transform: translateX(-100%);
+}
+
+:host(.open) {
+  transform: inherit;
+}

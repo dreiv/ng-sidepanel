@@ -1,4 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
+
+export type SidepanelPosition = 'end' | 'start';
+
+export const SidepanelPosition = {
+  End: 'end' as SidepanelPosition,
+  Start: 'start' as SidepanelPosition
+};
 
 /**
  * <app-sidepanel>
@@ -14,27 +21,17 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SidepanelComponent implements OnInit {
 
+  @HostBinding('class.open')
+  isOpen: boolean;
+
   @Input()
   get position() { return this._position; }
 
-  set position(value) {
-    this._position = value === 'end' ? 'end' : 'start';
+  set position(position: SidepanelPosition) {
+    this._position = position;
   }
 
-  private _position: 'start' | 'end' = 'start';
-
-  /**
-   * Whether the side panel is opened. We overload this because we trigger an event when it
-   * starts or end.
-   */
-  @Input()
-  get opened(): boolean { return this._opened; }
-
-  set opened(value: boolean) {
-    this.toggle(value);
-  }
-
-  private _opened = false;
+  private _position: SidepanelPosition;
 
   constructor() {}
 
@@ -55,8 +52,10 @@ export class SidepanelComponent implements OnInit {
    * Toggle the side panel.
    * @param isOpen Whether the side panel should be open.
    */
-  toggle(isOpen: boolean = !this.opened) {
-    this._opened = isOpen;
+  toggle(isOpen: boolean) {
+    if (this.isOpen !== isOpen) {
+      this.isOpen = isOpen;
+    }
   }
 
 }
