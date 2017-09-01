@@ -1,15 +1,21 @@
 <app-sidepanel-container>
-  <app-sidepanel #sidepanel>
+  <app-sidepanel #spStart>
     <h1>Side Panel</h1>
 
-    <button (click)="sidepanel.close()">Close me</button>
+    <button (click)="spStart.close()">Close me</button>
+  </app-sidepanel>
+
+  <app-sidepanel #spEnd [position]="'end'">
+    <h1>Side Panel</h1>
+
+    <button (click)="spEnd.close()">Close me</button>
   </app-sidepanel>
 
   <app-filler></app-filler>
 </app-sidepanel-container>
 
 <footer>
-  <button>TOC</button>
+  <button (click)="spStart.open()">TOC</button>
   <button>DOC</button>
-  <button (click)="sidepanel.open()">RELATED</button>
+  <button (click)="spEnd.open()">RELATED</button>
 </footer>

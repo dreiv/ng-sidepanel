@@ -4,10 +4,17 @@
   width: 100%;
   display: block;
   position: absolute;
-  transform: translateX(-100%);
   transition: transform .5s ease-in-out;
-}
 
-:host(.open) {
-  transform: inherit;
+  &.start {
+    transform: translateX(-100%);
+  }
+
+  &.end {
+    transform: translateX(100%);
+  }
+
+  &.open {
+    transform: inherit;
+  }
 }
