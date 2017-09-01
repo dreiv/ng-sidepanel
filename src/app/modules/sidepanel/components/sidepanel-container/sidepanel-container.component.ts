@@ -16,10 +16,9 @@ export function throwDuplicatedSidePanelError(position: string) {
 @Component({
   selector: 'app-sidepanel-container',
   templateUrl: './sidepanel-container.component.html',
-  styleUrls: ['./sidepanel-container.component.css']
+  styleUrls: ['./sidepanel-container.component.scss']
 })
 export class SidepanelContainerComponent implements AfterContentInit {
-
   @ContentChildren(SidepanelComponent) panels: QueryList<SidepanelComponent>;
 
   /** The sidepanel child with the `start` position. */

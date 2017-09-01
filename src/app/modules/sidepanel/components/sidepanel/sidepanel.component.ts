@@ -7,20 +7,22 @@ import { Component, Input, OnInit } from '@angular/core';
  *
  * Please refer to README.md for examples on how to use it.
  */
-@Component({
-  selector: 'app-sidepanel',
-  templateUrl: './sidepanel.component.html',
-  styleUrls: ['./sidepanel.component.scss'],
-  host: {
-    '[class.open]': 'this.opened',
-    '[class.start]': 'this.position === "start"',
-    '[class.end]': 'this.position === "end"'
-  }
-})
+@
+  Component({
+    selector: 'app-sidepanel',
+    templateUrl: './sidepanel.component.html',
+    styleUrls: ['./sidepanel.component.scss'],
+    host: {
+      '[class.opened]': 'this.opened',
+      '[class.start]': 'this.position === "start"',
+      '[class.end]': 'this.position === "end"'
+    }
+  })
+
 export class SidepanelComponent implements OnInit {
   /** Whether the side panel is opened. */
   private opened: boolean;
-  @Input() position: 'end' | 'start';
+  @Input() position: 'start' | 'end';
 
   constructor() {}
 
