@@ -18,6 +18,11 @@ export class SidepanelComponent implements OnInit {
   /** Whether the side panel is opened. */
   @HostBinding('class.opened') opened: boolean;
 
+  @HostBinding('class.start')
+  get isStart() {
+    return this.position === 'start';
+  }
+
   @HostBinding('class.end')
   get isEnd() {
     return this.position === 'end';

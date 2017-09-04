@@ -1,15 +1,18 @@
 :host {
   background: wheat;
   height: 100%;
-  width: 100%;
+  width: 80%;
   display: block;
   position: absolute;
   transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1);
   z-index: 10;
 
-  transform: translateX(-100%);
+  &.start {
+    transform: translateX(-100%);
+  }
 
   &.end {
+    margin-left: 20%;
     transform: translateX(100%);
   }
 
