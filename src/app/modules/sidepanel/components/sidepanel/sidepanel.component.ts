@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 
 /**
  * <app-sidepanel>
@@ -11,17 +11,18 @@ import { Component, Input, OnInit } from '@angular/core';
   Component({
     selector: 'app-sidepanel',
     templateUrl: './sidepanel.component.html',
-    styleUrls: ['./sidepanel.component.scss'],
-    host: {
-      '[class.opened]': 'this.opened',
-      '[class.start]': 'this.position === "start"',
-      '[class.end]': 'this.position === "end"'
-    }
+    styleUrls: ['./sidepanel.component.scss']
   })
 
 export class SidepanelComponent implements OnInit {
   /** Whether the side panel is opened. */
-  private opened: boolean;
+  @HostBinding('class.opened') private opened: boolean;
+
+  @HostBinding('class.end')
+  get isEnd() {
+    return this.position === 'end';
+  }
+
   @Input() position: 'start' | 'end';
 
   constructor() {}
