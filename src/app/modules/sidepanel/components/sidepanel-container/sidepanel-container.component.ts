@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChildren, HostListener, QueryList } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, HostBinding, HostListener, QueryList } from '@angular/core';
 import { startWith } from 'rxjs/operator/startWith';
 import { SidepanelComponent } from '../sidepanel/sidepanel.component';
 
@@ -21,6 +21,11 @@ export function throwDuplicatedSidePanelError(position: string) {
 })
 export class SidepanelContainerComponent implements AfterContentInit {
   @ContentChildren(SidepanelComponent) panels: QueryList<SidepanelComponent>;
+
+  @HostBinding('class.hasBackdrop')
+  get hasBackdrop() {
+    return this._start.opened || this._end.opened;
+  }
 
   /** The sidepanel child with the `start` position. */
   get start() { return this._start; }

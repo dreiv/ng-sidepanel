@@ -16,7 +16,7 @@ import { Component, HostBinding, Input, OnInit } from '@angular/core';
 
 export class SidepanelComponent implements OnInit {
   /** Whether the side panel is opened. */
-  @HostBinding('class.opened') private opened: boolean;
+  @HostBinding('class.opened') opened: boolean;
 
   @HostBinding('class.end')
   get isEnd() {
