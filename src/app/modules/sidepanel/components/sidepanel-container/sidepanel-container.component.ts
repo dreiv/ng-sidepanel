@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChildren, EventEmitter, Output, QueryList } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, HostListener, QueryList } from '@angular/core';
 import { startWith } from 'rxjs/operator/startWith';
 import { SidepanelComponent } from '../sidepanel/sidepanel.component';
 
@@ -15,7 +15,8 @@ export function throwDuplicatedSidePanelError(position: string) {
  */
 @Component({
   selector: 'app-sidepanel-container',
-  templateUrl: './sidepanel-container.component.html',
+  template: `
+    <ng-content></ng-content>`,
   styleUrls: ['./sidepanel-container.component.scss']
 })
 export class SidepanelContainerComponent implements AfterContentInit {
@@ -31,20 +32,12 @@ export class SidepanelContainerComponent implements AfterContentInit {
   private _start: SidepanelComponent | null;
   private _end: SidepanelComponent | null;
 
-  /** Event emitted when the backdrop is clicked. */
-  @Output() backdropClick = new EventEmitter<void>();
-
   constructor() { }
 
   ngAfterContentInit(): void {
     startWith.call(this.panels.changes, null).subscribe(() => {
       this.validatePanels();
     });
-  }
-
-  onBackdropClicked() {
-    this.backdropClick.emit();
-    console.log('backdrop clicked');
   }
 
   /** Validate the state of the side panel children components. */
@@ -68,5 +61,10 @@ export class SidepanelContainerComponent implements AfterContentInit {
         this._start.position = 'start';
       }
     });
+  }
+
+  @HostListener('click', ['$event'])
+  public onClick(event: MouseEvent): void {
+    console.log('clicked');
   }
 }
