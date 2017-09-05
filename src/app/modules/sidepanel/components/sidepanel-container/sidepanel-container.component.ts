@@ -68,7 +68,6 @@ export class SidepanelContainerComponent implements AfterContentInit {
   }
 
   contentClicked() {
-
     console.log('clicked');
   }
 }
