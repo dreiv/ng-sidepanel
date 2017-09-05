@@ -1,4 +1,4 @@
-<app-sidepanel-container>
+<app-sidepanel-container #sidepanel>
   <app-sidepanel #spStart>
     <h1>Side Panel</h1>
 
@@ -16,6 +16,6 @@
 
 <footer>
   <button (click)="spStart.toggle()">TOC</button>
-  <button>DOC</button>
+  <button (click)="sidepanel.closeAll()">DOC</button>
   <button (click)="spEnd.toggle()">RELATED</button>
 </footer>

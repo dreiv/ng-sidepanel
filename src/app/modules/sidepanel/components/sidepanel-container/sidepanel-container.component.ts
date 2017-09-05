@@ -67,7 +67,9 @@ export class SidepanelContainerComponent implements AfterContentInit {
     });
   }
 
-  contentClicked() {
-    console.log('clicked');
+  closeAll() {
+    this.panels.forEach((panel: SidepanelComponent) => {
+      panel.close();
+    });
   }
 }
