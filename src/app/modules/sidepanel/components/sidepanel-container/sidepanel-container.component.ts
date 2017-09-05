@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChildren, HostBinding, HostListener, QueryList } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, HostBinding, QueryList } from '@angular/core';
 import { startWith } from 'rxjs/operator/startWith';
 import { SidepanelComponent } from '../sidepanel/sidepanel.component';
 
@@ -15,8 +15,7 @@ export function throwDuplicatedSidePanelError(position: string) {
  */
 @Component({
   selector: 'app-sidepanel-container',
-  template: `
-    <ng-content></ng-content>`,
+  templateUrl: './sidepanel-container.component.html',
   styleUrls: ['./sidepanel-container.component.scss']
 })
 export class SidepanelContainerComponent implements AfterContentInit {
@@ -68,8 +67,8 @@ export class SidepanelContainerComponent implements AfterContentInit {
     });
   }
 
-  @HostListener('click', ['$event'])
-  public onClick(event: MouseEvent): void {
+  contentClicked() {
+
     console.log('clicked');
   }
 }
