@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core';
 
 /**
  * <app-sidepanel>
@@ -30,6 +30,10 @@ export class SidepanelComponent implements OnInit {
 
   @Input() position: 'start' | 'end';
 
+  @Output() onOpen = new EventEmitter();
+
+  @Output() onClose = new EventEmitter();
+
   constructor() {}
 
   ngOnInit() {
@@ -51,6 +55,7 @@ export class SidepanelComponent implements OnInit {
    */
   toggle(isOpen: boolean = !this.opened) {
     this.opened = isOpen;
+    isOpen ? this.onOpen.emit() : this.onClose.emit();
   }
 
 }

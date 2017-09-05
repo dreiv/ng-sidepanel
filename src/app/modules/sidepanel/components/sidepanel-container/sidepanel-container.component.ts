@@ -41,6 +41,9 @@ export class SidepanelContainerComponent implements AfterContentInit {
   ngAfterContentInit(): void {
     startWith.call(this.panels.changes, null).subscribe(() => {
       this.validatePanels();
+      this.panels.forEach((panel: SidepanelComponent) => {
+        this.watchPanelToggle(panel);
+      });
     });
   }
 
@@ -70,6 +73,16 @@ export class SidepanelContainerComponent implements AfterContentInit {
   closeAll() {
     this.panels.forEach((panel: SidepanelComponent) => {
       panel.close();
+    });
+  }
+
+  private watchPanelToggle(panel: SidepanelComponent): void {
+    panel.onOpen.subscribe(() => {
+      this.panels.forEach(p => {
+        if (p !== panel) {
+          p.close();
+        }
+      });
     });
   }
 }
