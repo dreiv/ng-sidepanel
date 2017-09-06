@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChildren, HostBinding, QueryList } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, QueryList } from '@angular/core';
 import { startWith } from 'rxjs/operator/startWith';
 import { SidepanelComponent } from '../sidepanel/sidepanel.component';
 
@@ -21,11 +21,6 @@ export function throwDuplicatedSidePanelError(position: string) {
 export class SidepanelContainerComponent implements AfterContentInit {
   @ContentChildren(SidepanelComponent) panels: QueryList<SidepanelComponent>;
 
-  @HostBinding('class.hasBackdrop')
-  get hasBackdrop() {
-    return this._start.opened || this._end.opened;
-  }
-
   /** The sidepanel child with the `start` position. */
   get start() { return this._start; }
 
@@ -35,6 +30,7 @@ export class SidepanelContainerComponent implements AfterContentInit {
   /** The sidepanel at the start/end position. */
   private _start: SidepanelComponent | null;
   private _end: SidepanelComponent | null;
+  active: SidepanelComponent | null;
 
   constructor() { }
 
@@ -70,19 +66,20 @@ export class SidepanelContainerComponent implements AfterContentInit {
     });
   }
 
-  closeAll() {
-    this.panels.forEach((panel: SidepanelComponent) => {
-      panel.close();
-    });
+  closeActivePanel() {
+    if (this.active) {
+      this.active.close();
+      this.active = null;
+    }
   }
 
   private watchPanelToggle(panel: SidepanelComponent): void {
     panel.onOpen.subscribe(() => {
-      this.panels.forEach(p => {
-        if (p !== panel) {
-          p.close();
-        }
-      });
+      if (this.active && this.active !== panel) {
+        this.active.close();
+      }
+
+      this.active = panel;
     });
   }
 }

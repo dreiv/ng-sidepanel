@@ -1,4 +1,4 @@
 <ng-content select="app-sidepanel"></ng-content>
-<div class="content" (click)="closeAll()">
+<div [class.backdrop]="active" (click)="closeActivePanel()">
   <ng-content></ng-content>
 </div>

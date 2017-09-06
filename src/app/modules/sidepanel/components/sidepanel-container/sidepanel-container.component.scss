@@ -5,7 +5,7 @@
   display: block;
   overflow: hidden;
 
-  &.hasBackdrop .content::after {
+  .backdrop::after {
     content: '';
     position: absolute;
     top: 0;
