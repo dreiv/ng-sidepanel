@@ -20,66 +20,64 @@ export function throwDuplicatedSidePanelError(position: string) {
 })
 export class SidepanelContainerComponent implements AfterContentInit {
   @ContentChildren(SidepanelComponent) panels: QueryList<SidepanelComponent>;
-
   /** The sidepanel child with the `start` position. */
-  get start() { return this._start; }
-
+  private start: SidepanelComponent;
   /** The sidepanel child with the `end` position. */
-  get end() { return this._end; }
-
-  /** The sidepanel at the start/end position. */
-  private _start: SidepanelComponent | null;
-  private _end: SidepanelComponent | null;
-  active: SidepanelComponent | null;
+  private end: SidepanelComponent;
+  /** The sidepanel child that is currently opened. */
+  active: SidepanelComponent;
 
   constructor() { }
 
   ngAfterContentInit(): void {
     startWith.call(this.panels.changes, null).subscribe(() => {
       this.validatePanels();
-      this.panels.forEach((panel: SidepanelComponent) => {
-        this.watchPanelToggle(panel);
-      });
+      this.panels.forEach(panel => this.watchToggle(panel));
     });
   }
 
   /** Validate the state of the side panel children components. */
   private validatePanels() {
-    this._start = this._end = null;
+    this.start = this.end = null;
 
     // Ensure that we have at most one start and one end side panel.
     this.panels.forEach(panel => {
       if (panel.position === 'end') {
-        if (this._end) {
+        if (this.end) {
           throwDuplicatedSidePanelError('end');
         }
 
-        this._end = panel;
+        this.end = panel;
       } else {
-        if (this._start) {
+        if (this.start) {
           throwDuplicatedSidePanelError('start');
         }
 
-        this._start = panel;
-        this._start.position = 'start';
+        this.start = panel;
+        this.start.position = 'start';
       }
     });
   }
 
+  /** Close the active panel if it is defined. */
   closeActivePanel() {
     if (this.active) {
       this.active.close();
-      this.active = null;
     }
   }
 
-  private watchPanelToggle(panel: SidepanelComponent): void {
+  /** Actions done on panel events such as close or open. */
+  private watchToggle(panel: SidepanelComponent): void {
     panel.onOpen.subscribe(() => {
-      if (this.active && this.active !== panel) {
-        this.active.close();
+      if (this.active !== panel) {
+        this.closeActivePanel();
       }
 
       this.active = panel;
+    });
+
+    panel.onClose.subscribe(() => {
+      this.active = null;
     });
   }
 }

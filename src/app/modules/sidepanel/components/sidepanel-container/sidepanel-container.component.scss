@@ -1,6 +1,5 @@
 :host {
   position: relative;
-  transition: opacity .5s;
   will-change: opacity;
   display: block;
   overflow: hidden;
@@ -14,8 +13,7 @@
     right: 0;
     background-color: rgba(0, 0, 0, .4);
     opacity: 1;
-    pointer-events: auto;
-    z-index: 9;
+    z-index: 1;
   }
 
 }
