@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { FillerComponent } from './filler/filler.component';
 import { SidepanelModule } from './modules/sidepanel/sidepanel.module';
+import { DocumentService } from './services/document.service';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,7 @@ import { SidepanelModule } from './modules/sidepanel/sidepanel.module';
     BrowserModule,
     SidepanelModule
   ],
-  providers: [],
+  providers: [DocumentService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

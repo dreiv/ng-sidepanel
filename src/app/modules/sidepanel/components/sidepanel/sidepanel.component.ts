@@ -33,6 +33,8 @@ export class SidepanelComponent {
 
   /** The side that the panel is attached to. */
   @Input() position: 'start' | 'end';
+  /** Whether the side panel is docked to the side of the container. */
+  @Input() dock: boolean;
 
   /** Emits whenever the panel has started opening. */
   @Output() onOpen = new EventEmitter();
