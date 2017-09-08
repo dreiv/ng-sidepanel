@@ -2,7 +2,7 @@ import { AfterContentInit, Component, ContentChildren, QueryList } from '@angula
 import { startWith } from 'rxjs/operator/startWith';
 import { SidepanelComponent } from '../sidepanel/sidepanel.component';
 
-/** Throws an exception when two SidePanels are matching the same position. */
+/** Throws an exception when two <app-sidepanel>s are matching the same position. */
 export function throwDuplicatedSidePanelError(position: string) {
   throw Error(`A side panel was already declared for 'position="${position}"'`);
 }
